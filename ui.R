@@ -8,25 +8,62 @@
 library(shiny)
 
 shinyUI(fluidPage(
-
-  # Application title
-  titlePanel("Application web pour les lois de probabilité"),
-
-  # Sidebar with a slider input for number of bins
-  sidebarLayout(
-    sidebarPanel(
-      sliderInput("nb",
-                  "Nombre d'observations",
-                  min = 1,
-                  max = 5000,
-                  value = 100),
-      sliderInput("n","Nombre d'essais",min = 0,max = 1000, value = 100),
-      sliderInput("proba","Probabilité",min = 0, max = 1, value = 0.5)
-    ),
-
-    # Show a plot of the generated distribution
-    mainPanel(
-      plotOutput("distPlot")
-    )
+  
+  navbarPage("Shiny",
+             tabPanel("Loi Binomiale",
+                      # Application title
+                      titlePanel("Loi Binomiale"),
+                      
+                      # Sidebar with a slider input for number of bins
+                      sidebarLayout(
+                        sidebarPanel(
+                          sliderInput("nb",
+                                      "Nombre d'observations",
+                                      min = 1,
+                                      max = 5000,
+                                      value = 100),
+                          sliderInput("n","Nombre d'essais",min = 0,max = 1000, value = 100),
+                          sliderInput("proba","Probabilité",min = 0, max = 1, value = 0.5)
+                        ),
+                        
+                        # Show a plot of the generated distribution
+                        mainPanel(
+                          tabsetPanel(type = "tabs",
+                                      tabPanel("Graphique", plotOutput("dispBinomiale")),
+                                      tabPanel("Résumé", verbatimTextOutput("summaryBinomiale"))
+                        )
+                      )
+                      )
+             ),
+             tabPanel("Loi de Poisson",
+                      # Application title
+                      titlePanel("Loi de Poisson"),
+                      
+                      # Sidebar with a slider input for number of bins
+                      sidebarLayout(
+                        sidebarPanel(
+                          sliderInput("nbPoisson",
+                                      "Nombre d'observations",
+                                      min = 1,
+                                      max = 5000,
+                                      value = 100),
+                          sliderInput("lambdaPoisson",
+                                      "Lambda",
+                                      min = 0,
+                                      max = 20,
+                                      step = 0.1,
+                                      value = 0.1)
+                        ),
+                        
+                        # Show a plot of the generated distribution
+                        mainPanel(
+                          tabsetPanel(type = "tabs",
+                                      tabPanel("Graphique", plotOutput("dispPoisson")),
+                                      tabPanel("Résumé", verbatimTextOutput("summaryPoisson"))
+                          )
+                        )
+                      )
+             )
+             
   )
 ))

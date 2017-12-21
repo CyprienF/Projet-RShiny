@@ -9,7 +9,7 @@ library(shiny)
 
 shinyServer(function(input, output) {
 
-  output$distPlot <- renderPlot({
+  output$dispBinomiale <- renderPlot({
         x <- seq(0,input$nb,1)
         y <- rbinom(x,input$n,input$proba)
         hist(y,probability = TRUE,
@@ -18,6 +18,24 @@ shinyServer(function(input, output) {
              main=paste('Loi binomiale n = ',input$n, 'p = ',input$proba))
         lines(density(y,bw=1), col='red', lwd=3)
         
+  })
+  
+  output$summaryBinomiale <- renderPrint({
+    
+  })
+  
+  output$dispPoisson <- renderPlot({
+    N <- seq(0,input$nbPoisson,1)
+    x <- rpois(N, input$lambdaPoisson)
+    hist(x, 
+         xlim=c(min(x),max(x)), probability=T, nclass=max(x)-min(x)+1, 
+         col='lightblue',
+         main=paste('Loi de Poisson, lambda = ',input$lambdaPoisson))
+    lines(density(x,bw=1), col='red', lwd=3)
+  })
+  
+  output$summaryPoisson <- renderPrint({
+    
   })
 
 })
