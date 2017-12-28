@@ -9,7 +9,7 @@ library(shiny)
 
 shinyUI(fluidPage(
   
-  navbarPage("Shiny",
+  navbarPage("Lois de probabilité",
              tabPanel("Loi Binomiale",
                       # Application title
                       titlePanel("Loi Binomiale"),
@@ -23,7 +23,8 @@ shinyUI(fluidPage(
                                       max = 5000,
                                       value = 100),
                           sliderInput("n","Nombre d'essais",min = 0,max = 1000, value = 100),
-                          sliderInput("proba","Probabilité",min = 0, max = 1, value = 0.5)
+                          sliderInput("proba","Probabilité",min = 0, max = 1, value = 0.5),
+                          downloadButton("downloadData", "Sauvegarder les valeurs")
                         ),
                         
                         # Show a plot of the generated distribution
@@ -52,7 +53,8 @@ shinyUI(fluidPage(
                                       min = 0,
                                       max = 20,
                                       step = 0.1,
-                                      value = 0.1)
+                                      value = 0.1),
+                         downloadButton("downloadData1", "Sauvegarder les valeurs")
                         ),
                         
                         # Show a plot of the generated distribution
