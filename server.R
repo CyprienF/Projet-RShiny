@@ -37,5 +37,13 @@ shinyServer(function(input, output) {
   output$summaryPoisson <- renderPrint({
     
   })
+  
+  output$tableBino <- renderTable({
+        
+  })
+  
+  output$tablePois <- renderTable({
+    
+  })
 
 })
