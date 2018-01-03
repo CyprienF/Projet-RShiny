@@ -21,6 +21,12 @@ shinyServer(function(input, output) {
   })
   
   output$summaryBinomiale <- renderPrint({
+    obs <- seq(0,input$nb,1)
+    v <- rbinom(obs,input$n,input$proba)
+    summary(v)
+  })
+  
+  output$tableBino <- renderTable({
     
   })
   
@@ -35,11 +41,9 @@ shinyServer(function(input, output) {
   })
   
   output$summaryPoisson <- renderPrint({
-    
-  })
-  
-  output$tableBino <- renderTable({
-        
+    N <- seq(0,input$nbPoisson,1)
+    x <- rpois(N, input$lambdaPoisson)
+    summary(x)
   })
   
   output$tablePois <- renderTable({
