@@ -27,7 +27,8 @@ shinyServer(function(input, output) {
   })
   
   output$tableBino <- renderTable({
-    
+    obs <- seq(0,input$nb,1)
+    summary <- table(rbinom(obs,input$n,input$proba))
   })
   
   output$dispPoisson <- renderPlot({
@@ -47,7 +48,8 @@ shinyServer(function(input, output) {
   })
   
   output$tablePois <- renderTable({
-    
+    N <- seq(0,input$nbPoisson,1)
+    summary <- table(rpois(N, input$lambdaPoisson))
   })
 
 })
