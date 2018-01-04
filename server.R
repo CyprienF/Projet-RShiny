@@ -10,7 +10,7 @@ library(shiny)
 shinyServer(function(input, output) {
   
   obs <- reactive({
-    obs <- seq(0,input$nb,1)
+    obs <- seq(1,input$nb,1)
   })
   
   xBinom <- reactive({
@@ -18,7 +18,7 @@ shinyServer(function(input, output) {
   })
   
   N <- reactive({
-    N <- seq(0,input$nbPoisson,1)
+    N <- seq(1,input$nbPoisson,1)
   })
   
   xPoiss <- reactive({
@@ -58,14 +58,9 @@ shinyServer(function(input, output) {
     summary <- table(xPoiss())
   })
   
-  z <- reactive({
-    obs <- seq(0,input$nb,1)
-    v <- rbinom(obs,input$n,input$proba)
-  })
-  
   output$downloadData <- downloadHandler(
     filename = function() {
-      paste("test", ".csv", sep = "")
+      paste("table_valeurs", ".csv", sep = "")
     },
     content = function(file) {
       write.csv(xBinom(), file, row.names = FALSE)
