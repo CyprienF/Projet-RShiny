@@ -68,7 +68,7 @@ shinyServer(function(input, output) {
       paste("test", ".csv", sep = "")
     },
     content = function(file) {
-      write.csv(z(), file, row.names = FALSE)
+      write.csv(xBinom(), file, row.names = FALSE)
     }
   )
 
