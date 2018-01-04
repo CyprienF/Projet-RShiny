@@ -8,48 +8,54 @@
 library(shiny)
 
 shinyServer(function(input, output) {
+  
+  obs <- reactive({
+    obs <- seq(0,input$nb,1)
+  })
+  
+  xBinom <- reactive({
+    x <- rbinom(obs(),input$n,input$proba)
+  })
+  
+  N <- reactive({
+    N <- seq(0,input$nbPoisson,1)
+  })
+  
+  xPoiss <- reactive({
+    x <- rpois(N(), input$lambdaPoisson)
+  })
 
   output$dispBinomiale <- renderPlot({
-        obs <- seq(0,input$nb,1)
-        x <- rbinom(obs,input$n,input$proba)
-        hist(x,probability = TRUE,
-             xlim=c(min(x),max(x)), nclass=max(x)-min(x)+1, 
+        hist(xBinom(),probability = TRUE,
+             xlim=c(min(xBinom()),max(xBinom())), nclass=max(xBinom())-min(xBinom())+1, 
              col='lightblue',
              main=paste('Loi binomiale n = ',input$n, 'p = ',input$proba))
-        lines(density(x,bw=1), col='red', lwd=3)
+        lines(density(xBinom(),bw=1), col='red', lwd=3)
         
   })
   
   output$summaryBinomiale <- renderPrint({
-    obs <- seq(0,input$nb,1)
-    v <- rbinom(obs,input$n,input$proba)
-    summary(v)
+    summary(xBinom())
   })
   
   output$tableBino <- renderTable({
-    obs <- seq(0,input$nb,1)
-    summary <- table(rbinom(obs,input$n,input$proba))
+    summary <- table(xBinom())
   })
   
   output$dispPoisson <- renderPlot({
-    N <- seq(0,input$nbPoisson,1)
-    x <- rpois(N, input$lambdaPoisson)
-    hist(x, 
-         xlim=c(min(x),max(x)), probability=T, nclass=max(x)-min(x)+1, 
+    hist(xPoiss(), 
+         xlim=c(min(xPoiss()),max(xPoiss())), probability=T, nclass=max(xPoiss())-min(xPoiss())+1, 
          col='lightblue',
          main=paste('Loi de Poisson, lambda = ',input$lambdaPoisson))
-    lines(density(x,bw=1), col='red', lwd=3)
+    lines(density(xPoiss(),bw=1), col='red', lwd=3)
   })
   
   output$summaryPoisson <- renderPrint({
-    N <- seq(0,input$nbPoisson,1)
-    x <- rpois(N, input$lambdaPoisson)
-    summary(x)
+    summary(xPoiss())
   })
   
   output$tablePois <- renderTable({
-    N <- seq(0,input$nbPoisson,1)
-    summary <- table(rpois(N, input$lambdaPoisson))
+    summary <- table(xPoiss())
   })
   
   z <- reactive({

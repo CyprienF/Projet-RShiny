@@ -48,13 +48,13 @@ shinyUI(fluidPage(
                                       "Nombre d'observations",
                                       min = 1,
                                       max = 5000,
-                                      value = 100),
+                                      value = 2500),
                           sliderInput("lambdaPoisson",
                                       "Lambda",
                                       min = 0,
                                       max = 20,
                                       step = 0.1,
-                                      value = 0.1),
+                                      value = 10),
                          downloadButton("downloadData1", "Sauvegarder les valeurs")
                         ),
                         
