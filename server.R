@@ -60,10 +60,19 @@ shinyServer(function(input, output) {
   
   output$downloadData <- downloadHandler(
     filename = function() {
-      paste("table_valeurs", ".csv", sep = "")
+      paste("table_valeurs_binom", ".csv", sep = "")
     },
     content = function(file) {
       write.csv(xBinom(), file, row.names = FALSE)
+    }
+  )
+  
+  output$downloadData1 <- downloadHandler(
+    filename = function() {
+      paste("table_valeurs_poiss", ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv(xPoiss(), file, row.names = FALSE)
     }
   )
 
