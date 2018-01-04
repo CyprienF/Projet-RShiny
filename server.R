@@ -51,5 +51,19 @@ shinyServer(function(input, output) {
     N <- seq(0,input$nbPoisson,1)
     summary <- table(rpois(N, input$lambdaPoisson))
   })
+  
+  z <- reactive({
+    obs <- seq(0,input$nb,1)
+    v <- rbinom(obs,input$n,input$proba)
+  })
+  
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      paste("test", ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv(z(), file, row.names = FALSE)
+    }
+  )
 
 })
