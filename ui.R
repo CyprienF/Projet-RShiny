@@ -69,6 +69,36 @@ shinyUI(fluidPage(
                           )
                         )
                       )
+             ),
+             tabPanel("Loi exponentielle",
+                      # Application title
+                      titlePanel("Loi exponentielle"),
+                      
+                      # Sidebar with a slider input for number of bins
+                      sidebarLayout(
+                        sidebarPanel(
+                          sliderInput("nbExponentielle",
+                                      "Nombre d'observations",
+                                      min = 2,
+                                      max = 5000,
+                                      value = 2500),
+                          sliderInput("lambdaExponentielle",
+                                      "Lambda",
+                                      min = 1,
+                                      max = 20,
+                                      step = 0.1,
+                                      value = 10),
+                          downloadButton("downloadData2", "Sauvegarder les valeurs")
+                        ),
+                        
+                        # Show a plot of the generated distribution
+                        mainPanel(
+                          tabsetPanel(type = "tabs",
+                                      tabPanel("Graphique", plotOutput("dispExponentielle")),
+                                      tabPanel("Résumé", verbatimTextOutput("summaryExponentielle"))
+                          )
+                        )
+                      )
              )
              
   )

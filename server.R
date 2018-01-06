@@ -10,23 +10,33 @@ library(shiny)
 shinyServer(function(input, output) {
   
   # Variables de la loi binomiale
-  obs <- reactive({
+  obsBinomiale <- reactive({
     obs <- seq(1,input$nb,1)
   })
   
   xBinom <- reactive({
-    x <- rbinom(obs(),input$n,input$proba)
+    x <- rbinom(obsBinomiale(),input$n,input$proba)
   })
   
-  # Variable de la loi de poisson
-  N <- reactive({
-    N <- seq(1,input$nbPoisson,1)
+  # Variables de la loi de poisson
+  obsPoisson <- reactive({
+    obs <- seq(1,input$nbPoisson,1)
   })
   
   xPoiss <- reactive({
-    x <- rpois(N(), input$lambdaPoisson)
+    x <- rpois(obsPoisson(), input$lambdaPoisson)
   })
-
+  
+  # Variables de la loi exponentielle
+  obsExponentielle <- reactive({
+    obs <- seq(1,input$nbExponentielle,1)
+  })
+  
+  xExponentielle <- reactive({
+    x <- rexp(obsExponentielle(), input$lambdaExponentielle)
+  })
+  
+  
   # Graphique de la loi binomiale
   output$dispBinomiale <- renderPlot({
         hist(xBinom(),probability = TRUE,
@@ -76,6 +86,18 @@ shinyServer(function(input, output) {
     boxplot(xPoiss())
   })
   
+  # Graphique de la loi exponentielle
+  output$dispExponentielle <- renderPlot({
+    hist(xExponentielle(), probability=T,
+         col='light blue', main=paste('Loi exponentielle, lambda = ',input$lambdaPoisson))
+    lines(density(xExponentielle()), col='red', lwd=3)
+  })
+  
+  # Résumé de la loi exponentielle
+  output$summaryExponentielle <- renderPrint({
+    summary(xExponentielle())
+  })
+  
   # Téléchargement du fichier de la loi binomiale
   output$downloadData <- downloadHandler(
     filename = function() {
@@ -93,6 +115,16 @@ shinyServer(function(input, output) {
     },
     content = function(file) {
       write.csv(xPoiss(), file, row.names = FALSE)
+    }
+  )
+  
+  # Téléchargement du fichier de la loi exponentielle
+  output$downloadData2 <- downloadHandler(
+    filename = function() {
+      paste("table_valeurs_expo", ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv(xExponentielle(), file, row.names = FALSE)
     }
   )
 
