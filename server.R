@@ -42,6 +42,10 @@ shinyServer(function(input, output) {
     summary <- table(xBinom())
   })
   
+  output$boxplotBinomiale <- renderPlot({
+    boxplot(xBinom())
+  })
+  
   output$dispPoisson <- renderPlot({
     hist(xPoiss(), 
          xlim=c(min(xPoiss()),max(xPoiss())), probability=T, nclass=max(xPoiss())-min(xPoiss())+1, 
@@ -56,6 +60,10 @@ shinyServer(function(input, output) {
   
   output$tablePois <- renderTable({
     summary <- table(xPoiss())
+  })
+  
+  output$boxplotPoisson <- renderPlot({
+    boxplot(xPoiss())
   })
   
   output$downloadData <- downloadHandler(

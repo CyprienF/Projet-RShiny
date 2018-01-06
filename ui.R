@@ -32,7 +32,8 @@ shinyUI(fluidPage(
                           tabsetPanel(type = "tabs",
                                       tabPanel("Graphique", plotOutput("dispBinomiale")),
                                       tabPanel("Résumé", verbatimTextOutput("summaryBinomiale")),
-                                      tabPanel("Table des valeurs",tableOutput("tableBino"))
+                                      tabPanel("Boxplot", plotOutput("boxplotBinomiale")),
+                                      tabPanel("Table des valeurs", tableOutput("tableBino"))
                         )
                       )
                       )
@@ -63,7 +64,8 @@ shinyUI(fluidPage(
                           tabsetPanel(type = "tabs",
                                       tabPanel("Graphique", plotOutput("dispPoisson")),
                                       tabPanel("Résumé", verbatimTextOutput("summaryPoisson")),
-                                      tabPanel("Table des valeurs",tableOutput("tablePois"))
+                                      tabPanel("Boxplot", plotOutput("boxplotPoisson")),
+                                      tabPanel("Table des valeurs", tableOutput("tablePois"))
                           )
                         )
                       )
