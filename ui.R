@@ -79,7 +79,7 @@ shinyUI(fluidPage(
                         sidebarPanel(
                           sliderInput("nbExponentielle",
                                       "Nombre d'observations",
-                                      min = 2,
+                                      min = 1,
                                       max = 5000,
                                       value = 2500),
                           sliderInput("lambdaExponentielle",
@@ -95,11 +95,40 @@ shinyUI(fluidPage(
                         mainPanel(
                           tabsetPanel(type = "tabs",
                                       tabPanel("Graphique", plotOutput("dispExponentielle")),
-                                      tabPanel("Résumé", verbatimTextOutput("summaryExponentielle"))
+                                      tabPanel("Résumé", verbatimTextOutput("summaryExponentielle")),
+                                      tabPanel("Boxplot", plotOutput("boxplotExp")),
+                                      tabPanel("Table des valeurs", tableOutput("tableExp"))
+                                      
+                          )
+                        )
+                      )
+             ),
+             tabPanel("Loi normale centrée réduite",
+                      # Application title
+                      titlePanel("Loi normale centrée réduite"),
+                      
+                      # Sidebar with a slider input for number of bins
+                      sidebarLayout(
+                        sidebarPanel(
+                          sliderInput("nbNorm",
+                                      "Nombre d'observations",
+                                      min = 1,
+                                      max = 5000,
+                                      value = 2500),
+                          downloadButton("downloadData3", "Sauvegarder les valeurs")
+                        ),
+                        
+                        # Show a plot of the generated distribution
+                        mainPanel(
+                          tabsetPanel(type = "tabs",
+                                      tabPanel("Graphique", plotOutput("dispNormale")),
+                                      tabPanel("Résumé", verbatimTextOutput("summaryNormale")),
+                                      tabPanel("Boxplot", plotOutput("boxplotNorm")),
+                                      tabPanel("Table des valeurs", tableOutput("tableNorm"))
                           )
                         )
                       )
              )
-             
+
   )
 ))
