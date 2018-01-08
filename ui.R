@@ -88,7 +88,8 @@ shinyUI(fluidPage(
                                       max = 20,
                                       step = 0.1,
                                       value = 10),
-                          downloadButton("downloadData2", "Sauvegarder les valeurs")
+                          downloadButton("downloadData2", "Sauvegarder les valeurs"),
+                          actionButton('save_inputs', 'Save inputs')
                         ),
                         
                         # Show a plot of the generated distribution

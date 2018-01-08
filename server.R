@@ -211,5 +211,10 @@ shinyServer(function(input, output) {
       write.csv(xNorm(), file, row.names = FALSE)
     }
   )
+  
+  observeEvent(input$save_inputs,{
+    showNotification("Sauvegarde effectuee",type = "message", duration = 5)
+    write.csv(xNorm(),"save_norm.csv",row.names = FALSE)
+  })
 
 })
