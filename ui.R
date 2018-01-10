@@ -6,8 +6,6 @@
 #
 
 library(shiny)
-
-shinyUI(fluidPage(
   
   navbarPage("Lois de probabilité",
              tabPanel("Loi Binomiale",
@@ -132,4 +130,3 @@ shinyUI(fluidPage(
              )
 
   )
-))
