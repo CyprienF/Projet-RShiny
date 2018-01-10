@@ -212,9 +212,28 @@ shinyServer(function(input, output) {
     }
   )
   
-  observeEvent(input$save_inputs,{
-    showNotification("Sauvegarde effectuee",type = "message", duration = 5)
+  # Sauvegarde des données de la loi binomiale
+  observeEvent(input$saveInputBinomiale,{
+    showNotification("Sauvegarde effectuée",type = "message", duration = 10)
+    write.csv(xNorm(),"save_binom.csv",row.names = FALSE)
+  })
+  
+  # Sauvegarde des données de la loi de poisson
+  observeEvent(input$saveInputPoisson,{
+    showNotification("Sauvegarde effectuée",type = "message", duration = 10)
+    write.csv(xNorm(),"save_poisson.csv",row.names = FALSE)
+  })
+  
+  # Sauvegarde des données de la loi normale
+  observeEvent(input$saveInputNormale,{
+    showNotification("Sauvegarde effectuée",type = "message", duration = 10)
     write.csv(xNorm(),"save_norm.csv",row.names = FALSE)
+  })
+  
+  # Sauvegarde des données de la loi centrée réduite
+  observeEvent(input$saveInputReduite,{
+    showNotification("Sauvegarde effectuée",type = "message", duration = 10)
+    write.csv(xNorm(),"save_centree.csv",row.names = FALSE)
   })
 
 })

@@ -22,7 +22,8 @@ library(shiny)
                                       value = 100),
                           sliderInput("n","Nombre d'essais",min = 0,max = 1000, value = 100),
                           sliderInput("proba","Probabilité",min = 0, max = 1, value = 0.5),
-                          downloadButton("downloadData", "Sauvegarder les valeurs")
+                          downloadButton("downloadData", "Télécharger les valeurs"),
+                          actionButton('saveInputBinomiale', 'Sauvegarder les données')
                         ),
                         
                         # Show a plot of the generated distribution
@@ -54,7 +55,8 @@ library(shiny)
                                       max = 20,
                                       step = 0.1,
                                       value = 10),
-                         downloadButton("downloadData1", "Sauvegarder les valeurs")
+                         downloadButton("downloadData1", "Télécharger les valeurs"),
+                         actionButton('saveInputPoisson', 'Sauvegarder les données')
                         ),
                         
                         # Show a plot of the generated distribution
@@ -86,8 +88,8 @@ library(shiny)
                                       max = 20,
                                       step = 0.1,
                                       value = 10),
-                          downloadButton("downloadData2", "Sauvegarder les valeurs"),
-                          actionButton('save_inputs', 'Save inputs')
+                          downloadButton("downloadData2", "Télécharger les valeurs"),
+                          actionButton('saveInputNormale', 'Sauvegarder les données')
                         ),
                         
                         # Show a plot of the generated distribution
@@ -114,7 +116,8 @@ library(shiny)
                                       min = 1,
                                       max = 5000,
                                       value = 2500),
-                          downloadButton("downloadData3", "Sauvegarder les valeurs")
+                          downloadButton("downloadData3", "Télécharger les valeurs"),
+                          actionButton('saveInputReduite', 'Sauvegarder les données')
                         ),
                         
                         # Show a plot of the generated distribution
