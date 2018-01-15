@@ -46,7 +46,7 @@ shinyServer(function(input, output) {
   })
   
   output$dispNormale <- renderPlot({
-    hist(xNorm(), xlab = "x", ylab = "Fréquence",
+    hist(xNorm(), xlab = "x", ylab = "Effectif",
          main = "Loi normale centrée réduite",
          col = "skyblue", border = "white")
     lines(density(xNorm(),bw=1), col='red', lwd=3)
@@ -74,7 +74,7 @@ shinyServer(function(input, output) {
         hist(xBinom(),probability = TRUE, xlab = "x",
              xlim=c(min(xBinom()),max(xBinom())), nclass=max(xBinom())-min(xBinom())+1, 
              col='lightblue',
-             main=paste('Loi binomiale n = ',input$n, 'p = ',input$proba))
+             main=paste('Loi binomiale n = ',input$n, 'p = ',input$proba),ylab = "Probabilité")
         lines(density(xBinom(),bw=1), col='red', lwd=3)
         abline(v = mean(xBinom()),
                col = "royalblue",
@@ -113,7 +113,7 @@ shinyServer(function(input, output) {
     hist(xPoiss(), xlab = "x",
          xlim=c(min(xPoiss()),max(xPoiss())), probability=T, nclass=max(xPoiss())-min(xPoiss())+1, 
          col='lightblue',
-         main=paste('Loi de Poisson, lambda = ',input$lambdaPoisson))
+         main=paste('Loi de Poisson, lambda = ',input$lambdaPoisson),ylab = "Probabilité")
     lines(density(xPoiss(),bw=1), col='red', lwd=3)
     abline(v = mean(xPoiss()),
            col = "royalblue",
@@ -145,7 +145,7 @@ shinyServer(function(input, output) {
   # Graphique de la loi exponentielle
   output$dispExponentielle <- renderPlot({
     hist(xExponentielle(), probability=T,
-         col='light blue', main=paste('Loi exponentielle, lambda = ',input$lambdaExponentielle))
+         col='light blue', main=paste('Loi exponentielle, lambda = ',input$lambdaExponentielle),ylab="Effectif")
     lines(density(xExponentielle(),bw=1), col='red', lwd=3)
     abline(v = mean(xExponentielle()),
            col = "royalblue",
